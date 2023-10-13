@@ -67,6 +67,10 @@ const createOrder = (req, res) => {
     try {
         const { order } = req.body;
 
+        if (!order) {
+            return res.status(400).json({status: 400, message: `POST's body must have a key of "order"!`});
+        }
+
         const {fname, lname, phone, address, email, price, pizza} = order;
         
         if(
