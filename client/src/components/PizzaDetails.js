@@ -48,7 +48,7 @@ const PizzaDetails = () => {
 			)}
 		</Page>
 	);
-};
+}; 
 
 export default PizzaDetails;
 
