@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
 const Homepage = () => {
 	const [state, setState] = useState(null);
@@ -20,7 +21,7 @@ const Homepage = () => {
 				state.map((pizza) => (
 					<PizzaCard key={pizza.id}>
 						<Image src={pizza.src} alt={`${pizza.name} pizza`} />
-						<PizzaDetails>
+						<PizzaInfo>
 							<PizzaName>{pizza.name}</PizzaName>
 							<PizzaDescription>{pizza.description}</PizzaDescription>
 							<PizzaToppings>
@@ -29,8 +30,8 @@ const Homepage = () => {
 							<PizzaPrice>
 								Starting at: <strong>{pizza.price.Small}</strong>
 							</PizzaPrice>
-						</PizzaDetails>
-						<MoreInfoButton to={`/pizza-details/${pizza.id}`}>
+						</PizzaInfo>
+						<MoreInfoButton to={`/pizzas/${pizza.id}`}>
 							More info
 						</MoreInfoButton>
 					</PizzaCard>
@@ -52,6 +53,7 @@ const Page = styled.div`
 	margin-right: 0;
 	flex-direction: column;
 	align-items: center;
+	height: 100%;
 `;
 const Title = styled.h1`
 	padding-top: 100px;
@@ -80,7 +82,7 @@ const Image = styled.img`
 	margin-right: 25px;
 `;
 
-const PizzaDetails = styled.div`
+const PizzaInfo = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
@@ -135,4 +137,5 @@ const MoreInfoButton = styled(Link)`
 
 const LoadingMessage = styled.h1`
 	padding-top: 100px;
+	height: 100vh;
 `;

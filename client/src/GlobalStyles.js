@@ -56,6 +56,14 @@ const GlobalStyle = createGlobalStyle`
         border-collapse: collapse;
         border-spacing: 0;
     }
+
+    html, body {
+    margin: 0;
+    padding: 0;
+    background-color: aliceblue;
+  }
+
 `;
+
 
 export default GlobalStyle;
