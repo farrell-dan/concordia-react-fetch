@@ -39,7 +39,7 @@ const PizzaDetails = () => {
 									))}
 								</PriceBoxContainer>
 							</div>
-							<OrderNowButton to={"/orders"}>🍕Order Now!🍕</OrderNowButton>
+							<OrderNowButton to={"/order"}>🍕Order Now!🍕</OrderNowButton>
 						</PizzaInfo>
 					</Card>
 				))

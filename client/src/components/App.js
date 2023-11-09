@@ -7,6 +7,7 @@ import styled from "styled-components";
 import PizzaDetails from "./PizzaDetails"; 
 
 import { useParams } from "react-router-dom";
+import Order from "./Order";
 
 
 const App = () => {
@@ -19,9 +20,9 @@ const App = () => {
             <Routes>
 
                 <Route path="/" element={<Homepage/>} />
-                <Route path="/order" element={<h1>Pizza Time?</h1>} />
+                {/* <Route path="/order" element={<h1>Pizza Time?</h1>} /> */}
                 <Route path={`/pizzas/:pizzaId`} element={<PizzaDetails />} />
-                
+                <Route path="/order" element={< Order />} />                
 
             </Routes>
             
