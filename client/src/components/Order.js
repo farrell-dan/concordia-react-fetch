@@ -80,9 +80,9 @@ const Order = () => {
 					});
 				}
 			})
-			.then((data) => {
-				console.log("Response Data:", data);
-				navigate(`/confirm/${data.orderId}`);
+			.then((order) => {
+				console.log("Response Data:", order);
+				navigate(`/confirm/${order.data.id}`);
 			})
 			.catch((error) => {
 				alert("Order creation failed. Please try again.");
@@ -94,7 +94,7 @@ const Order = () => {
 			<OrderForm>
 				<h2>Order Form</h2>
 				<form onSubmit={handleFormSubmit}>
-					<div>
+					<FormGroup>
 						<label>First Name:</label>
 						<input
 							type="text"
@@ -102,8 +102,8 @@ const Order = () => {
 							value={customerInfo.firstName}
 							onChange={handleChange}
 						/>
-					</div>
-					<div>
+					</FormGroup>
+					<FormGroup>
 						<label>Last Name:</label>
 						<input
 							type="text"
@@ -111,8 +111,8 @@ const Order = () => {
 							value={customerInfo.lastName}
 							onChange={handleChange}
 						/>
-					</div>
-					<div>
+					</FormGroup>
+					<FormGroup>
 						<label>Address:</label>
 						<input
 							type="text"
@@ -120,8 +120,8 @@ const Order = () => {
 							value={customerInfo.address}
 							onChange={handleChange}
 						/>
-					</div>
-					<div>
+					</FormGroup>
+					<FormGroup>
 						<label>Email:</label>
 						<input
 							type="email"
@@ -129,8 +129,8 @@ const Order = () => {
 							value={customerInfo.email}
 							onChange={handleChange}
 						/>
-					</div>
-					<div>
+					</FormGroup>
+					<FormGroup>
 						<label>Phone Number:</label>
 						<input
 							type="tel"
@@ -138,8 +138,8 @@ const Order = () => {
 							value={customerInfo.phoneNumber}
 							onChange={handleChange}
 						/>
-					</div>
-					<div>
+					</FormGroup>
+					<FormGroup>
 						<label>Select Pizza:</label>
 						<select value={selectedPizza} onChange={handlePizzaSelection}>
 							<option value="">Select a pizza</option>
@@ -150,27 +150,31 @@ const Order = () => {
 									</option>
 								))}
 						</select>
-					</div>
+					</FormGroup>
 					{selectedPizza && (
-						<div>
+						<FormGroup>
 							<label>Price:</label>
-							{Object.entries(
-								state.find((pizza) => pizza.id === selectedPizza).price
-							).map(([size, price]) => (
-								<div key={size}>
-									<input
-										type="radio"
-										name="size"
-										value={price}
-										checked={selectedSize === price}
-										onChange={handleSizeSelection}
-									/>
-									{size}:{price}
-								</div>
-							))}
-						</div>
+							<SizeOptions>
+								{Object.entries(
+									state.find((pizza) => pizza.id === selectedPizza).price
+								).map(([size, price]) => (
+									<SizeOption key={size}>
+										<input
+											type="radio"
+											name="size"
+											value={price}
+											checked={selectedSize === price}
+											onChange={handleSizeSelection}
+										/>
+										{size}:{price}
+									</SizeOption>
+								))}
+							</SizeOptions>
+						</FormGroup>
 					)}
-					<button type="submit">Place Order</button>
+					<>
+						<ButtonContainer type="submit">Place Order</ButtonContainer>
+					</>
 				</form>
 			</OrderForm>
 		</OrderPage>
@@ -181,16 +185,61 @@ export default Order;
 
 const OrderPage = styled.div`
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
-	height: 100vh;
+	height: 60vh;
 	background-color: aliceblue;
 `;
 
 const OrderForm = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: column;
 	background-color: white;
 	padding: 20px;
 	border: 1px solid #ddd;
 	border-radius: 8px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	width: 50%;
+	margin: 0 auto;
+
+	h2{
+		font-size: 5vh;
+	}
+	label{
+		font-size: 2.5vh;
+	}
+	input{
+		
+	}
+`;
+
+const FormGroup = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 15px;
+`;
+
+const SizeOptions = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+`;
+
+const SizeOption = styled.div`
+	margin: 5px;
+	justify-content: space-between;
+`;
+
+const ButtonContainer = styled.button`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 3vh;
+	cursor: pointer;
 `;
